@@ -1,0 +1,5 @@
+create 2 links in footer of @templates/base.html.
+-'Terms and Conditions'
+-'Privacy Policy'
+
+Both should be plain text links, no styling needed. Each link should appear on its own separate line.

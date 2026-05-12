@@ -2,6 +2,52 @@
 
 {% block title %}Spendly — Track Every Rupee{% endblock %}
 
+{% block head %}
+<style>
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+
+    .modal-box {
+        position: relative;
+        width: 90%;
+        max-width: 800px;
+        aspect-ratio: 16 / 9;
+        background: #000;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-box iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: -2.5rem;
+        right: 0;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.75rem;
+        cursor: pointer;
+        line-height: 1;
+        opacity: 0.8;
+    }
+    .modal-close:hover { opacity: 1; }
+</style>
+{% endblock %}
+
 {% block content %}
 
 <section class="hero">
@@ -19,7 +65,7 @@
     </p>
     <div class="hero-actions">
         <a href="{{ url_for('register') }}" class="btn-primary">Create free account</a>
-        <a href="#features" class="btn-primary">See how it works</a>
+        <button id="open-modal" class="btn-primary">See how it works</button>
     </div>
 
     <div class="mock-dashboard">
@@ -96,4 +142,49 @@
     </div>
 </section>
 
+<!-- Video Modal -->
+<div class="modal-overlay" id="video-modal">
+    <div class="modal-box">
+        <button class="modal-close" id="close-modal" aria-label="Close">&times;</button>
+        <!-- Replace VIDEO_ID below with your YouTube video ID when ready -->
+        <iframe
+            id="yt-iframe"
+            src=""
+            data-src="https://www.youtube.com/embed/jNQXAC9IVRw?rel=0&autoplay=1&enablejsapi=1"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const modal   = document.getElementById('video-modal');
+    const iframe  = document.getElementById('yt-iframe');
+    const openBtn = document.getElementById('open-modal');
+    const closeBtn = document.getElementById('close-modal');
+
+    function openModal() {
+        iframe.src = iframe.dataset.src;
+        modal.classList.add('active');
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+        iframe.src = '';
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeModal();
+    });
+</script>
 {% endblock %}

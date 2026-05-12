@@ -2,4 +2,34 @@ create 2 links in footer of @templates/base.html.
 -'Terms and Conditions'
 -'Privacy Policy'
 
-Both should be plain text links, no styling needed. Each link should appear on its own separate line.
+Both should be plain text links, no styling needed.
+Both the links should appear on its own separate line.
+
+Create a Terms and Conditions page for the expense tracker app.
+
+1. Register a GET /terms route that renders templates/terms.html.
+2. Create templates/terms.html that extends @templates/base.html.
+3. The page should contain generic Terms and Conditions content appropriate for a personal expense tracking app.
+   Include the following sections:
+   - Acceptance of Terms
+   - Use of Service
+   - User Accounts and Responsibilities
+   - Data and Privacy
+   - Limitation of Liability
+   - Changes to Terms
+   - Contact Information
+
+Create a Privacy Policy page for the expense tracker app.
+
+1. Register a GET /privacy route that renders templates/privacy.html.
+2. Create templates/privacy.html that extends @templates/base.html.
+3. The page should contain generic Privacy Policy content appropriate for a personal expense tracking app.
+   Include the following sections:
+   - Information We Collect
+   - How We Use Your Information
+   - Data Storage and Security
+   - Sharing of Information
+   - Cookies and Tracking
+   - Your Rights
+   - Changes to This Policy
+   - Contact Information
